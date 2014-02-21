@@ -64,7 +64,7 @@ class Plates extends \Slim\View
      * @param array  $data      Any additonal data to be passed to the template.
      * @return string               The rendered template
      */
-    public function render($template, $data){
+    protected function render($template, $data = null){
         $platesTemplate = new \League\Plates\Template($this->getInstance());
         $platesTemplate->data($this->all());
         return $platesTemplate->render($template, $data);
