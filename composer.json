@@ -1,0 +1,30 @@
+{
+    "name": "philipsharp/slim-view-plates",
+    "description": "Custom Slim Framework view for the Plates template system",
+    "keywords": [
+        "slim",
+        "plates",
+        "templating"
+    ],
+    "homepage": "http://github.com/philipsharp/slim-view-plates",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philip Sharp",
+            "email": "philip@kerzap.com",
+            "homepage": "http://www.philipsharp.com/"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.*",
+        "league/plates": "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "philipsharp\\Slim\\View\\": "src"
+        }
+    }
+}
