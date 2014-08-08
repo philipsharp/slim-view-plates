@@ -19,9 +19,6 @@
         "slim/slim": "2.*",
         "league/plates": "2.*"
     },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*"
-    },
     "autoload": {
         "psr-4": {
             "philipsharp\\Slim\\View\\": "src"
