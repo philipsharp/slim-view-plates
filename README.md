@@ -10,7 +10,7 @@ Add the provider to your `composer.json` file:
 ```json
 {
     "require": {
-        "philipsharp/slim-view-plates": "1.*"
+        "philipsharp/slim-view-plates": "2.*"
     }
 }
 ```
