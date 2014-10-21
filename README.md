@@ -48,6 +48,44 @@ templates.
 Add to the `$view->templatesFolders` array, where the key is the name of the
 folder and the value is the path.
 
+### Extension
+
+You can access Slim's URL functions inside templates by hooking up the view 
+extension: 
+
+```php
+$view->parserExtensions = array(
+    new philipsharp\Slim\View\PlatesExtension()
+);
+```
+
+#### URL
+
+Inside your Plates template you would write:
+
+    <?= $this->urlFor('hello', array('name' => 'Josh', 'age' => '19')); ?>
+
+You can easily pass variables that are objects or arrays by doing:
+
+    <a href="<?= $this->urlFor('hello', array('name' => $person->name, 'age' => $person->age)) ?>">Hello <?= $name; ?></a>
+
+If you need to specify the appname for the getInstance method in the urlFor functions, set it as the third parameter of the function
+in your template:
+
+    <a href="<?= $this->urlFor('hello', array('name' => $person->name, 'age' => $person->age), 'admin') ?>">Hello <?= $name; ?></a>
+
+#### Site URL
+
+Inside your Plates template you would write:
+
+    <?= $this->siteUrl('/about/me'); ?>
+
+#### Base URL
+
+Inside your Plates template you would write:
+
+    <?= $this->baseUrl(); ?>
+
 ### Advanced Usage
 
 To access the Plates engine object for further customization, including loading
