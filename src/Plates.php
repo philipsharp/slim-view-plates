@@ -17,14 +17,14 @@ class Plates extends \Slim\View
      * @var string
      */
     public $fileExtension;
-    
+
     /**
      * Templates path (override of Slim templates.path)
      *
      * @var mixed string or null
      */
     public $templatesPath;
-    
+
     /**
      * Template folders
      *
