@@ -39,16 +39,16 @@ class Plates extends \Slim\View
      */
     public function getInstance()
     {
-        if (!$this->engineInstance){
+        if (!$this->engineInstance) {
             // Create new Plates engine
             $this->engineInstance = new \League\Plates\Engine($this->templatesPath ?: $this->getTemplatesDirectory());
 
-            if ($this->fileExtension){
+            if ($this->fileExtension) {
                 $this->engineInstance->setFileExtension($this->fileExtension);
             }
 
-            if (count($this->templatesFolders)){
-                foreach($this->templatesFolders as $name => $path){
+            if (count($this->templatesFolders)) {
+                foreach ($this->templatesFolders as $name => $path) {
                     $this->engineInstance->addFolder($name, $path);
                 }
             }
@@ -64,7 +64,8 @@ class Plates extends \Slim\View
      * @param array  $data      Any additonal data to be passed to the template.
      * @return string               The rendered template
      */
-    protected function render($template, $data = null){
+    protected function render($template, $data = null)
+    {
         $platesTemplate = new \League\Plates\Template\Template($this->getInstance(), $template);
         $platesTemplate->data($this->all());
         return $platesTemplate->render(is_array($data) ? $data : []);
