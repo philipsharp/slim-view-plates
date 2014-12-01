@@ -1,8 +1,11 @@
 <?php
+namespace PhilipSharp\Slim\View;
 
-namespace philipsharp\Slim\View;
+use Slim\View;
+use League\Plates\Engine;
+use League\Plates\Template\Template;
 
-class Plates extends \Slim\View
+class Plates extends View
 {
     /**
      * Instance of a Plates engine
@@ -17,14 +20,14 @@ class Plates extends \Slim\View
      * @var string
      */
     public $fileExtension;
-    
+
     /**
      * Templates path (override of Slim templates.path)
      *
      * @var mixed string or null
      */
     public $templatesPath;
-    
+
     /**
      * Template folders
      *
@@ -33,23 +36,35 @@ class Plates extends \Slim\View
     public $templatesFolders = array();
 
     /**
-     * Get a Plates engine
+     * Parser extensions
+     *
+     * @var array
+     */
+    public $parserExtensions = array();
+
+    /**
+     * Get an instance of the Plates Engine
      *
      * @return \League\Plates\Engine
      */
     public function getInstance()
     {
-        if (!$this->engineInstance){
-            // Create new Plates engine
-            $this->engineInstance = new \League\Plates\Engine($this->templatesPath ?: $this->getTemplatesDirectory());
+        if (! $this->engineInstance) {
+            $this->engineInstance = new Engine($this->templatesPath ?: $this->getTemplatesDirectory());
 
-            if ($this->fileExtension){
-                $this->engineInstance->setFileExtension($this->fileExtension);
+            if ($this->fileExtension) {
+                $this->engineInstance->setFileExtension($this->fileExtension); 
             }
 
-            if (count($this->templatesFolders)){
-                foreach($this->templatesFolders as $name => $path){
+            if (count($this->templatesFolders) > 0) {
+                foreach ($this->templatesFolders as $name => $path) {
                     $this->engineInstance->addFolder($name, $path);
+                }
+            }
+
+            if (count($this->parserExtensions) > 0) {
+                foreach ($this->parserExtensions as $extension) {
+                    $this->engineInstance->loadExtension($extension);
                 }
             }
         }
@@ -60,13 +75,14 @@ class Plates extends \Slim\View
     /**
      * Render a template file
      *
-     * @param string $template  The template pathname, relative to the template base directory
-     * @param array  $data      Any additonal data to be passed to the template.
-     * @return string               The rendered template
+     * @param  string $template  The template pathname, relative to the template base directory.
+     * @param  array  $data      Any additonal data to be passed to the template.
+     * @return string            The rendered template.
      */
-    protected function render($template, $data = null){
-        $platesTemplate = new \League\Plates\Template($this->getInstance());
-        $platesTemplate->data($this->all());
-        return $platesTemplate->render($template, $data);
+    public function render($template, $data = array())
+    {
+        $plates = $this->getInstance()->make($template);
+        $plates->data($this->data->all());
+        return $plates->render((array) $data);
     }
 }
