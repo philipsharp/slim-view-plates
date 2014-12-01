@@ -1,36 +1,31 @@
 <?php
-namespace philipsharp\Slim\View;
+namespace PhilipSharp\Slim\View;
 
+use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
 use Slim\Slim;
 
 class PlatesExtension implements ExtensionInterface
 {
     /**
-     * Instance of the parent engine.
-     * @var \League\Plates\Engine
-     */
-    public $engine;
-
-    /**
-     * Instance of the current template.
-     * @var \League\Plates\Template
-     */
-    public $template;
-
-    /**
-     * Get Functions.
+     * Register functions with the Plates engine.
      *
-     * @var array
+     * @param \League\Plates\Engine $engine The Plates Engine instance.
+     * @return void
      */
-    public function getFunctions()
+    public function register(Engine $engine)
     {
-        return array(
-            'slim'    => 'getSlimInstance',
-            'urlFor'  => 'urlFor',
-            'baseUrl' => 'baseUrl',
-            'siteUrl' => 'siteUrl',
-        );
+        $engine->registerFunction('slim', array($this, 'getObject'));
+    }
+
+    /**
+     * Get the extension object instance.
+     * 
+     * @return self
+     */
+    public function getObject()
+    {
+        return $this;
     }
 
     /**
@@ -39,7 +34,7 @@ class PlatesExtension implements ExtensionInterface
      * @param string $appName The name of the Slim instance to retrieve.
      * @return \Slim\Slim     The Slim instance.
      */
-    public function getSlimInstance($appName = null)
+    public function getInstance($appName = null)
     {
         if (! empty($appName)) {
             return Slim::getInstance($appName);

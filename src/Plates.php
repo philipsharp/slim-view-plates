@@ -1,9 +1,9 @@
 <?php
-namespace philipsharp\Slim\View;
+namespace PhilipSharp\Slim\View;
 
 use Slim\View;
 use League\Plates\Engine;
-use League\Plates\Template;
+use League\Plates\Template\Template;
 
 class Plates extends View
 {
@@ -79,10 +79,10 @@ class Plates extends View
      * @param  array  $data      Any additonal data to be passed to the template.
      * @return string            The rendered template.
      */
-    public function render($template, $data = null)
+    public function render($template, $data = array())
     {
-        $plates = new Template($this->getInstance());
-        $plates->data($this->all());
-        return $plates->render($template, $data);
+        $plates = $this->getInstance()->make($template);
+        $plates->data($this->data->all());
+        return $plates->render((array) $data);
     }
 }

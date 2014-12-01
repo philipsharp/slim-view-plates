@@ -20,7 +20,7 @@ Enable it in your application
 ```php
 <?php
 
-$view = new \philipsharp\Slim\View\Plates();
+$view = new \PhilipSharp\Slim\View\Plates();
 
 $app = new \Slim\Slim(array(
     'view' => $view
@@ -55,7 +55,7 @@ extension:
 
 ```php
 $view->parserExtensions = array(
-    new philipsharp\Slim\View\PlatesExtension()
+    new \PhilipSharp\Slim\View\PlatesExtension()
 );
 ```
 
@@ -67,24 +67,30 @@ Inside your Plates template you would write:
 
 You can easily pass variables that are objects or arrays by doing:
 
-    <a href="<?= $this->urlFor('hello', array('name' => $person->name, 'age' => $person->age)) ?>">Hello <?= $name; ?></a>
+    <a href="<?= $this->slim()->urlFor('hello', array('name' => $person->name, 'age' => $person->age)) ?>">Hello <?= $name; ?></a>
 
 If you need to specify the appname for the getInstance method in the urlFor functions, set it as the third parameter of the function
 in your template:
 
-    <a href="<?= $this->urlFor('hello', array('name' => $person->name, 'age' => $person->age), 'admin') ?>">Hello <?= $name; ?></a>
+    <a href="<?= $this->slim()->urlFor('hello', array('name' => $person->name, 'age' => $person->age), 'admin') ?>">Hello <?= $name; ?></a>
 
 #### Site URL
 
 Inside your Plates template you would write:
 
-    <?= $this->siteUrl('/about/me'); ?>
+    <?= $this->slim()->siteUrl('/about/me'); ?>
 
 #### Base URL
 
 Inside your Plates template you would write:
 
-    <?= $this->baseUrl(); ?>
+    <?= $this->slim()->baseUrl(); ?>
+
+#### Slim Instance
+
+Inside your plates template you would write: 
+    
+    <? $this->slim()->getInstance('appname'); ?>
 
 ### Advanced Usage
 

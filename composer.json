@@ -1,6 +1,6 @@
 {
     "name": "philipsharp/slim-view-plates",
-    "description": "Custom Slim Framework view for the Plates template system",
+    "description": "A custom Slim framework view for the Plates template system.",
     "keywords": [
         "slim",
         "plates",
@@ -17,11 +17,11 @@
     ],
     "require": {
         "slim/slim": "2.*",
-        "league/plates": "2.*"
+        "league/plates": "3.*"
     },
     "autoload": {
         "psr-4": {
-            "philipsharp\\Slim\\View\\": "src"
+            "PhilipSharp\\Slim\\View\\": "src"
         }
     }
 }
