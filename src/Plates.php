@@ -65,7 +65,7 @@ class Plates extends \Slim\View
      * @return string               The rendered template
      */
     protected function render($template, $data = null){
-        $platesTemplate = new \League\Plates\Template($this->getInstance());
+        $platesTemplate = new \League\Plates\Template\Template($this->getInstance());
         $platesTemplate->data($this->all());
         return $platesTemplate->render($template, $data);
     }
