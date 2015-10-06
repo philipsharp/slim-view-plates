@@ -17,7 +17,7 @@
     ],
     "require": {
         "slim/slim": "2.*",
-        "league/plates": "2.*"
+        "league/plates": "3.*"
     },
     "autoload": {
         "psr-4": {
