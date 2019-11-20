@@ -68,6 +68,6 @@ class Plates extends \Slim\View
     {
         $platesTemplate = new \League\Plates\Template\Template($this->getInstance(), $template);
         $platesTemplate->data($this->all());
-        return $platesTemplate->render(is_array($data) ? $data : []);
+        return $platesTemplate->render(is_array($data) ? $data : array());
     }
 }
